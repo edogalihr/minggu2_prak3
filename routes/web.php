@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\CompanyController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +25,17 @@ Route::prefix('/prodi')->group (function () {
 });
 
 route::get('news/{id}', [PageController::class,'news']);
+
 route::prefix('sarana')->groub (function() {
     route::get('/Perkantoran', [CompanyController::class,'Perkantoran']);
     route::get('/Laboratorium', [CompanyController::class,'Laboratorium']);
     route::get('/Kelas', [CompanyController::class,'Kelas']);
     route::get('/Ruang TU', [CompanyController::class,'Ruang tu']);
 });
-
+Route::prefix('prodi')->group(function(){
+    Route::get('/Manajemen Informatika',[ProdiController::class, 'mi page']);
+    Route::get('/Teknik Informatika',[ProdiController::class, 'ti page']);
+});
 route::get('about', [CompanyController::class,'about']);
-route::get('comment/{nama}/comment{id?}', [CompanyController::class,'comment']);
+route::get('comment/{nama}/comment{id?}', [CommentController::class,'comment']);
     return "User ".$nama. " komentar ke ".$id;
